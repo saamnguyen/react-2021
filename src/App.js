@@ -2,7 +2,25 @@ import { useState } from "react";
 
 //const gifts = ["CPU i9", "RAM 32GB RGB", "RGB Keyboard"];
 
+//two way bindling
+//Respone from API
+const courses = [
+	{
+		id: 1,
+		name: "HTML, CSS",
+	},
+	{
+		id: 2,
+		name: "Java",
+	},
+	{
+		id: 3,
+		name: "Python",
+	},
+];
+
 function App() {
+	//gitf
 	//const [gift, setGift] = useState(); //Hien thi chua co phan thuong nen mac dinh la khong co tham so
 
 	//console.log(gift + setGift);
@@ -13,23 +31,45 @@ function App() {
 	// 	//console.log(gifts[index]);
 	// };
 
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
+	//form email, name
+	// const [name, setName] = useState("");
+	// const [email, setEmail] = useState("");
+
+	//courses
+	const [checked, setChecked] = useState();
+	console.log(checked);
 
 	const handleSubmit = () => {
 		//Call API
-		console.log({
-			name,
-			email,
-		});
+
+		//form email, name
+		// console.log({
+		// 	name,
+		// 	email,
+		// });
+
+		//courses
+		console.log({ id: checked });
 	};
 
 	//console.log(name);
 
 	return (
 		<div style={{ padding: 32 }}>
-			<input value={name} onChange={(e) => setName(e.target.value)} />
+			{/* <input value={name} onChange={(e) => setName(e.target.value)} />
 			<input value={email} onChange={(e) => setEmail(e.target.value)} />
+			<button onClick={handleSubmit}>Submit</button> */}
+			{courses.map((course) => (
+				<div key={course.id}>
+					<input
+						type="radio"
+						checked={checked === course.id}
+						onChange={() => setChecked(course.id)}
+					/>
+					{course.name}
+				</div>
+			))}
+
 			<button onClick={handleSubmit}>Submit</button>
 		</div>
 	);
