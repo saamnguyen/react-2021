@@ -19,7 +19,8 @@ function App() {
 
 	return (
 		<div style={{ padding: 32 }}>
-			<input onChange={(e) => setName(e.target.value)} />
+			<input value={name} onChange={(e) => setName(e.target.value)} />
+			<button onClick={() => setName("Nguyen Van BBB")}>Change</button>
 		</div>
 	);
 }
