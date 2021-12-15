@@ -36,20 +36,30 @@ function App() {
 	// const [email, setEmail] = useState("");
 
 	//courses
-	const [checked, setChecked] = useState();
+	const [checked, setChecked] = useState([]);
 	console.log(checked);
+
+	const handleCheck = (id) => {
+		setChecked((prev) => {
+			const isChecked = checked.includes(id);
+			if (isChecked) {
+				//uncheck
+				return checked.filter((item) => item !== id); //bo check2 lan
+			} else {
+				return [...prev, id];
+			}
+		});
+	};
 
 	const handleSubmit = () => {
 		//Call API
-
 		//form email, name
 		// console.log({
 		// 	name,
 		// 	email,
 		// });
-
 		//courses
-		console.log({ id: checked });
+		console.log({ ids: checked });
 	};
 
 	//console.log(name);
@@ -62,9 +72,9 @@ function App() {
 			{courses.map((course) => (
 				<div key={course.id}>
 					<input
-						type="radio"
-						checked={checked === course.id}
-						onChange={() => setChecked(course.id)}
+						type="checkbox"
+						checked={checked.includes(course.id)}
+						onChange={() => handleCheck(course.id)} // courses
 					/>
 					{course.name}
 				</div>
