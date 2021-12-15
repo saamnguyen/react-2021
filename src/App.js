@@ -14,13 +14,23 @@ function App() {
 	// };
 
 	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
 
-	console.log(name);
+	const handleSubmit = () => {
+		//Call API
+		console.log({
+			name,
+			email,
+		});
+	};
+
+	//console.log(name);
 
 	return (
 		<div style={{ padding: 32 }}>
 			<input value={name} onChange={(e) => setName(e.target.value)} />
-			<button onClick={() => setName("Nguyen Van BBB")}>Change</button>
+			<input value={email} onChange={(e) => setEmail(e.target.value)} />
+			<button onClick={handleSubmit}>Submit</button>
 		</div>
 	);
 }
