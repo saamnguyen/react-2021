@@ -6,6 +6,7 @@ function Content() {
 	const [title, setTitle] = useState("");
 	const [posts, setPosts] = useState([]);
 	const [type, setType] = useState("posts");
+	const [showGoToTop, setShowGoToTop] = useState(false);
 
 	//console.log(type);
 
@@ -16,6 +17,27 @@ function Content() {
 				setPosts(posts);
 			});
 	}, [type]);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if (window.scrollY >= 200) {
+				//show
+				setShowGoToTop(true);
+			} else {
+				//hiden
+				setShowGoToTop(false);
+			}
+			//setShowGoToTop(window.scrollY >= 200) ghi nhanh
+		};
+
+		window.addEventListener("scroll", handleScroll);
+
+		//cleanup function
+		return () => {
+			//console.log('Unmounted')
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
 
 	return (
 		<div>
@@ -35,6 +57,11 @@ function Content() {
 					<li key={post.id}>{post.title || post.name}</li>
 				))}
 			</ul>
+			{showGoToTop && (
+				<button style={{ position: "fixed", right: 20, bottom: 20 }}>
+					Go to top
+				</button>
+			)}
 		</div>
 	);
 }
