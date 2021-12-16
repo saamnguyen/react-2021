@@ -18,27 +18,6 @@ function Content() {
 			});
 	}, [type]);
 
-	useEffect(() => {
-		const handleScroll = () => {
-			if (window.scrollY >= 200) {
-				//show
-				setShowGoToTop(true);
-			} else {
-				//hiden
-				setShowGoToTop(false);
-			}
-			//setShowGoToTop(window.scrollY >= 200) ghi nhanh
-		};
-
-		window.addEventListener("scroll", handleScroll);
-
-		//cleanup function
-		return () => {
-			//console.log('Unmounted')
-			window.removeEventListener("scroll", handleScroll);
-		};
-	}, []);
-
 	return (
 		<div>
 			{tabs.map((tab) => (
