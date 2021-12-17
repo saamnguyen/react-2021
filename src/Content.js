@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 
 function Content() {
-	const [countdown, setCountdown] = useState(180);
+	const [count, setCount] = useState(1);
 
 	useEffect(() => {
-		const timerId = setInterval(() => {
-			setCountdown((prev) => prev - 1);
-		}, 1000);
+		console.log(`Mount or Re-render lan ${count}`);
 
-		return () => clearInterval(timerId);
-	}, []);
+		return () => console.log(`Cleanup lan ${count}`);
+	}, [count]);
 
 	return (
 		<div>
-			<h1>{countdown}</h1>
+			<h1>{count}</h1>
+			<button onClick={() => setCount(count + 1)}>Click me!</button>
 		</div>
 	);
 }
