@@ -1,27 +1,47 @@
 import { useEffect, useState } from "react";
 
+const lessions = [
+	{
+		id: 1,
+		name: "React la gi? Tai sao nen hoc React",
+	},
+	{
+		id: 2,
+		name: "SPA/MPA la gi?",
+	},
+	{
+		id: 3,
+		name: "Arrow Funtion",
+	},
+];
+
 function Content() {
-	const [avatar, setAvatar] = useState();
+	const [lessionId, setLessionId] = useState(1);
 
 	useEffect(() => {
-		//cleanup
-		return () => {
-			avatar && URL.revokeObjectURL(avatar.preview);
+		const handleComment = (e) => {
+			console.log(e);
 		};
-	}, [avatar]);
 
-	const handlePreviewAvatar = (e) => {
-		const file = e.target.files[0];
+		window.addEventListener(`lesson-${lessionId}`, handleComment);
 
-		file.preview = URL.createObjectURL(file);
-
-		setAvatar(file);
-	};
+		return () =>
+			window.removeEventListener(`lesson-${lessionId}`, handleComment);
+	}, [lessionId]);
 
 	return (
 		<div>
-			<input type="file" onChange={handlePreviewAvatar} />
-			{avatar && <img src={avatar.preview} alt="" width="80%"></img>}
+			<ul>
+				{lessions.map((lession) => (
+					<li
+						key={lession.id}
+						style={{ color: lessionId === lession.id ? "red" : "#333" }}
+						onClick={() => setLessionId(lession.id)}
+					>
+						{lession.name}
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 }
