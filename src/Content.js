@@ -1,47 +1,23 @@
-import { useEffect, useState } from "react";
-
-const lessions = [
-	{
-		id: 1,
-		name: "React la gi? Tai sao nen hoc React",
-	},
-	{
-		id: 2,
-		name: "SPA/MPA la gi?",
-	},
-	{
-		id: 3,
-		name: "Arrow Funtion",
-	},
-];
+import { useLayoutEffect, useState } from "react";
 
 function Content() {
-	const [lessionId, setLessionId] = useState(1);
+	const [count, setCount] = useState(0);
 
-	useEffect(() => {
-		const handleComment = (e) => {
-			console.log(e);
-		};
+	//Những trường hợp xử dụng như set state r check lại state đó trong useEffect xong set lại chính nó
+	useLayoutEffect(() => {
+		if (count > 3) {
+			setCount(0);
+		}
+	}, [count]);
 
-		window.addEventListener(`lesson-${lessionId}`, handleComment);
-
-		return () =>
-			window.removeEventListener(`lesson-${lessionId}`, handleComment);
-	}, [lessionId]);
+	const handleRun = () => {
+		setCount(count + 1);
+	};
 
 	return (
 		<div>
-			<ul>
-				{lessions.map((lession) => (
-					<li
-						key={lession.id}
-						style={{ color: lessionId === lession.id ? "red" : "#333" }}
-						onClick={() => setLessionId(lession.id)}
-					>
-						{lession.name}
-					</li>
-				))}
-			</ul>
+			<h1>{count}</h1>
+			<button onClick={handleRun}>Run</button>
 		</div>
 	);
 }
