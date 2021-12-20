@@ -1,10 +1,10 @@
-import { ThemeContext } from "./App";
+import { ThemeContext } from "./ThemeContext";
 import { useContext } from "react";
 
 function Paragraph() {
-	const theme = useContext(ThemeContext);
+	const context = useContext(ThemeContext);
 
-	return <p className={theme}>Hello World</p>;
+	return <p className={context.theme}>Hello World</p>;
 }
 
 export default Paragraph;

@@ -1,8 +1,7 @@
 import Content from "./Content";
-import { useState, createContext } from "react";
 import "./App.css";
-
-export const ThemeContext = createContext(); //return 1 obj gom provider, consumer
+import { useContext } from "react";
+import { ThemeContext } from "./ThemeContext";
 
 //Context
 //CompA => CompB => CompC
@@ -10,17 +9,12 @@ export const ThemeContext = createContext(); //return 1 obj gom provider, consum
 //Theme Dart/Night
 
 function App() {
-	const [theme, setTheme] = useState("dark");
-	const toggleTheme = () => {
-		setTheme(theme === "dark" ? "light" : "dark");
-	};
+	const context = useContext(ThemeContext);
 	return (
-		<ThemeContext.Provider value={theme}>
-			<div style={{ padding: 20 }}>
-				<button onClick={toggleTheme}>Toggle Theme</button>
-				<Content />
-			</div>
-		</ThemeContext.Provider>
+		<div style={{ padding: 20 }}>
+			<button onClick={context.toggleTheme}>Toggle Theme</button>
+			<Content />
+		</div>
 	);
 }
 
