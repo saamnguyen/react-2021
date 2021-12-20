@@ -13,6 +13,8 @@ const SET_JOB = "set_job";
 const ADD_JOB = "add_job";
 const DELETE_JOB = "delete_job";
 
+//Tao 3 actions duoi dang function
+//payload la du lieu mang theo di
 const setJob = (payload) => {
 	return {
 		type: SET_JOB,
@@ -46,8 +48,8 @@ const reducer = (state, action) => {
 	switch (action.type) {
 		case SET_JOB:
 			newState = {
-				...state,
-				job: action.payload,
+				...state, //Bao luu state cu
+				job: action.payload, //con nhung state can thay doi thi doi o day
 			};
 			break;
 		case ADD_JOB:
@@ -84,7 +86,7 @@ function App() {
 		inputRef.current.focus();
 	};
 
-	const { job, jobs } = state;
+	const { job, jobs } = state; //Dinh nghia lay ra state
 	return (
 		<div style={{ padding: 32 }}>
 			<h3>Todo</h3>
