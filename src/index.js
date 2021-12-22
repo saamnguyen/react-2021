@@ -3,28 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider } from "./ThemeContext";
-
-//Fake comments
-function emit(id) {
-	setInterval(() => {
-		window.dispatchEvent(
-			new CustomEvent(`lesson-${id}`, {
-				detail: `Noi dung cmt cua lession-${id}`,
-			})
-		);
-	}, 2000);
-}
-
-emit(1);
-emit(2);
-emit(3);
+import { StoreProvider } from "./store";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<ThemeProvider>
+		<StoreProvider>
 			<App />
-		</ThemeProvider>
+		</StoreProvider>
 	</React.StrictMode>,
 	document.getElementById("root")
 );

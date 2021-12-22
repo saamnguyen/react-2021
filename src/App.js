@@ -1,19 +1,29 @@
-import Content from "./Content";
-import "./App.css";
-import { useContext } from "react";
-import { ThemeContext } from "./ThemeContext";
-
-//Context
-//CompA => CompB => CompC
-
-//Theme Dart/Night
+import { useStore, actions } from "./store";
 
 function App() {
-	const context = useContext(ThemeContext);
+	const [state, dispatch] = useStore();
+
+	const { todos, todoInput } = state;
+
+	const hanldeAdd = () => {
+		dispatch(actions.addToDo(todoInput));
+	};
+
 	return (
 		<div style={{ padding: 20 }}>
-			<button onClick={context.toggleTheme}>Toggle Theme</button>
-			<Content />
+			<input
+				value={todoInput}
+				placeholder="Enter"
+				onChange={(e) => {
+					dispatch(actions.setToDoInput(e.target.value));
+				}}
+			/>
+
+			<button onClick={hanldeAdd}>ADD</button>
+
+			{todos.map((todo, index) => (
+				<li key={index}>{todo}</li>
+			))}
 		</div>
 	);
 }
